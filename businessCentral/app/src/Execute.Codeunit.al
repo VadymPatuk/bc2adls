@@ -376,6 +376,7 @@ codeunit 82561 "ADLSE Execute"
         if not ADLSECurrentSession.AreAnySessionsActive() then begin
             ADLSESetupRec.GetSingleton();
             ADLSEExternalEvents.OnExportFinished(ADLSESetupRec, ADLSETable);
+            OnExportFinished(ADLSETable, TableCaption);
 
             if EmitTelemetry then
                 ADLSEExecution.Log('ADLSE-041', 'All exports are finished', Verbosity::Normal);
@@ -466,6 +467,11 @@ codeunit 82561 "ADLSE Execute"
 
     [IntegrationEvent(false, false)]
     internal procedure OnAfterSetStateFinished(var ADLSETable: Record "ADLSE Table"; TableCaption: Text)
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    internal procedure OnExportFinished(var ADLSETable: Record "ADLSE Table"; TableCaption: Text)
     begin
     end;
 }
